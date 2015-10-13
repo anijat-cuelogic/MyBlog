@@ -1,0 +1,2 @@
+$("#addcmnt").html("<%= escape_javascript(render(:partial => 'comment_contents',
+  :locals => {post: @post})).html_safe %>");

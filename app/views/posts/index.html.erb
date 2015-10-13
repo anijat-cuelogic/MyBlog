@@ -1,0 +1,14 @@
+<h1>Blog AnyThing..!!</h1>
+
+<p id="notice"><%= notice %></p>
+    <% @posts.each do |post| %>
+
+      <h2>
+      <%= link_to post.title, post_path(post.to_param) %></h2>
+      <p>
+        <%= post.description %>
+      </p>
+    <% end %>
+<br>
+
+<%= link_to 'New Post', new_post_path %>
