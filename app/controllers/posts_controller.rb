@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
 
+  skip_before_filter :authenticate_user!, :only => [:index, :show]
   before_action :set_post, only: [ :edit, :update, :destroy]
 
   def index
