@@ -6,5 +6,4 @@ class User < ActiveRecord::Base
 
   has_many :posts
 
-  scope :find_user, -> (user_id) {find(user_id)}
 end
