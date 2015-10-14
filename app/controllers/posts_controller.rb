@@ -42,7 +42,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
+    @post.destroy if current_user.present?
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
@@ -55,6 +55,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description)
+      params.require(:post).permit(:title, :description, :author_id)
     end
 end
