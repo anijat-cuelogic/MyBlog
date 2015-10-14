@@ -3,14 +3,14 @@
       <%= link_to 'Destroy', [@post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
   </p>
 <% end %>
-  <%= form_for [@post, @post.comments.build] , remote: true do |f| %>
-    <p>
-      <div>
-        <%= f.label :description, "Comment Description" %><br />
-        <%= f.text_area :description %>
-      </div>
-    </p>
-    <p>
-      <%= f.submit "Add Comment" %>
-    </p>
-  <% end %>
+<%= form_for [@post, @post.comments.build] , remote: true do |f| %>
+  <p>
+    <div>
+      <%= f.label :description, "Comment Description" %><br />
+      <%= f.text_area :description %>
+    </div>
+  </p>
+  <p>
+    <%= f.submit "Add Comment" %>
+  </p>
+<% end %>
