@@ -11,11 +11,11 @@
 <h2>Comments</h2>
 
 <div id ="addcmnt">
-<% @post.comments.each do |com| %>
-  <p> <%= com.description%><br />
-      <%= link_to 'Destroy', [@post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
-  </p>
-<% end %>
+  <% @post.comments.each do |com| %>
+    <p> <%= com.description%><br />
+        <%= link_to 'Destroy', [@post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
+    </p>
+  <% end %>
   <%= form_for [@post, @post.comments.build] , remote: true do |f| %>
     <p>
       <div>

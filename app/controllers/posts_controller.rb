@@ -17,7 +17,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-    redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to @post, notice: 'Post was successfully created.'
     else
       @errors = @post.errors.full_messages.to_sentence
       render :new
@@ -25,7 +25,6 @@ class PostsController < ApplicationController
   end
 
   private
-
     def set_post
       @post = Post.find(params[:id])
     end
