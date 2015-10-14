@@ -5,7 +5,7 @@
   <p> <%= com.description%><br />
       <% commented_user = User.find_user(com.commented_by)%>
       <%=commented_user.name%> : <%= com.created_at.strftime("%d-%b-%y at %l:%M")%><br />
-      <% if com.commented_by == current_user.id%>
+      <% if user_signed_in? && com.commented_by == current_user.id%>
         <%= link_to 'Destroy', [@post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
       <%end%>
   </p>
