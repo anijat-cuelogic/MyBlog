@@ -1,22 +1,6 @@
 <h1>Edit your post</h1>
 <% if @post.user == current_user %>
-  <%= form_for(@post) do |f| %>
-    <% if @errors.present? %>
-      <div><%= @errors %></div>
-    <% end %>
-
-    <div>
-      <%= f.label :title %><br>
-      <%= f.text_field :title %>
-    </div>
-    <div>
-      <%= f.label :description %><br>
-      <%= f.text_area :description %>
-    </div>
-    <div>
-      <%= f.submit %>
-    </div>
-  <% end %>
+  <%= render 'form' %>
 <% else %>
   <%= 'You are not supposed to edit others post' %><br>
 <% end %>

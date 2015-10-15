@@ -9,31 +9,7 @@
 <h2>Comments</h2>
 
 <div id ="addcmnt">
-  <% if @errors.present? %>
-    <%= @errors%>
-  <% end %>
-  <% @post.comments.each do |com| %>
-    <p> <%= com.description%><br />
-        <%=com.user.name%> : <%= com.created_at.strftime("%d-%b-%y at %l:%M")%><br />
-        <% if user_signed_in? && com.user == current_user%>
-          <%= link_to 'Destroy', [@post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%end%>
-    </p>
-  <% end %>
-  <% if user_signed_in? %>
-    <%= form_for [@post, @post.comments.build] , remote: true do |f| %>
-      <p>
-        <div>
-          <%= f.label :description, "Comment Description" %><br />
-          <%= f.text_area :description %>
-          <%= f.hidden_field :commented_by, value: current_user.id%>
-        </div>
-      </p>
-      <p>
-        <%= f.submit "Add Comment" %>
-      </p>
-    <% end %>
-  <% end %>
+  <%= render :partial => 'comments/comment_contents', :locals => {:post => @post} %>
 </div>
 <p>
   <% if user_signed_in? && @post.user == current_user %>
