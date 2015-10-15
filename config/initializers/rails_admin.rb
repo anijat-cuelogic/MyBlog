@@ -14,8 +14,42 @@ RailsAdmin.config do |config|
     list do
       field :name
       field :email
+      field :roles
+    end
+    edit do
+      field :name
+      field :email
       field :password
       field :password_confirmation
+      field :roles
+    end
+  end
+
+  config.model Post do
+    object_label_method  :title
+    list do
+      field :title
+      field :description
+      field :author
+    end
+    edit do
+      field :title
+      field :description
+      field :author
+    end
+  end
+
+  config.model Comment do
+    object_label_method  :commented_by
+    list do
+      field :description
+      field :commented_by
+      field :post_id
+    end
+    edit do
+      field :description
+      field :commented_by
+      field :post_id
     end
   end
 
