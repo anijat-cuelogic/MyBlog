@@ -9,15 +9,17 @@
       <%end%>
   </p>
 <% end %>
-<%= form_for [post, post.comments.build] , remote: true do |f| %>
-  <p>
-    <div>
-      <%= f.label :description, "Comment Description" %><br />
-      <%= f.text_area :description %>
-      <%= f.hidden_field :commented_by, value: current_user.id%>
-    </div>
-  </p>
-  <p>
-    <%= f.submit "Add Comment" %>
-  </p>
+<% if user_signed_in? %>
+  <%= form_for [post, post.comments.build] , remote: true do |f| %>
+    <p>
+      <div>
+        <%= f.label :description, "Comment Description" %><br />
+        <%= f.text_area :description %>
+        <%= f.hidden_field :commented_by, value: current_user.id%>
+      </div>
+    </p>
+    <p>
+      <%= f.submit "Add Comment" %>
+    </p>
+  <% end %>
 <% end %>
