@@ -16,6 +16,8 @@ class Ability
       end
       if user.roles == nil
         can :access, :home
+        can :read, :Post
+        can :read, :Comment
       end
     #
     # The first argument to `can` is the action you are giving the user

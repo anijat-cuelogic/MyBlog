@@ -8,6 +8,9 @@ RailsAdmin.config do |config|
   # end
   config.current_user_method(&:current_user)
   config.authorize_with :cancan
+  config.authorize_with do
+    redirect_to main_app.root_path unless current_user.role? :admin
+  end
 
   config.model User do
     object_label_method  :name
@@ -30,12 +33,12 @@ RailsAdmin.config do |config|
     list do
       field :title
       field :description
-      field :author
+      field :author_id
     end
     edit do
       field :title
       field :description
-      field :author
+      field :author_id
     end
   end
 
