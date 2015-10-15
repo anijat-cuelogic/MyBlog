@@ -6,6 +6,12 @@ class User < ActiveRecord::Base
 
   has_many :posts
   has_many :comments
+  has_many :user_roles
+  has_many :roles,:through => :user_roles
   validates_presence_of :name
+
+  def role?(role)
+    return !!self.roles.find_by_name(role.to_s)
+  end
 
 end
