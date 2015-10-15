@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
     flash.now[:notice] = "Access denied!"
     redirect_to main_app.root_path, :alert => exception.message
   end
-  check_authorization unless: :devise_controller?
+
+  def after_sign_in_path_for(resource)
+    if current_user && (current_user.role? :admin)
+      rails_admin.dashboard_path
+    else
+      root_url
+    end
+  end
 
 end
