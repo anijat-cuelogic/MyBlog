@@ -6,8 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :posts, :foreign_key => :author_id ,:class_name =>"Post"
   has_many :comments, :foreign_key => :commented_by ,:class_name =>"Comment"
-  has_many :user_roles
-  has_many :roles,:through => :user_roles
+  has_and_belongs_to_many :roles
   validates_presence_of :name
 
   def role?(role)

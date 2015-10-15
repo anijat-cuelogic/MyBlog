@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151015092249) do
+ActiveRecord::Schema.define(version: 20151015123453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,15 +42,15 @@ ActiveRecord::Schema.define(version: 20151015092249) do
 
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
-  create_table "user_roles", force: :cascade do |t|
+  create_table "roles_users", force: :cascade do |t|
     t.integer  "role_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
+  add_index "roles_users", ["role_id"], name: "index_roles_users_on_role_id", using: :btree
+  add_index "roles_users", ["user_id"], name: "index_roles_users_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -72,6 +72,6 @@ ActiveRecord::Schema.define(version: 20151015092249) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "comments", "posts"
-  add_foreign_key "user_roles", "roles"
-  add_foreign_key "user_roles", "users"
+  add_foreign_key "roles_users", "roles"
+  add_foreign_key "roles_users", "users"
 end
