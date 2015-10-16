@@ -47,6 +47,8 @@ class PostsController < ApplicationController
 
   def destroy
     if @post.user == current_user
+      @post.image = nil
+      @post.save
       @post.destroy
     else
       redirect_to @post, notice: 'You are not supposed to delete others post'
@@ -63,6 +65,6 @@ class PostsController < ApplicationController
     end
 
     def post_params
-      params.require(:post).permit(:title, :description, :author_id)
+      params.require(:post).permit(:title, :description, :author_id, :image)
     end
 end

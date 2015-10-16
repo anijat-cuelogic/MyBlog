@@ -5,6 +5,11 @@
 <p>
   <%= @post.description %>
 </p>
+<%if @post.image%>
+  <p>
+    <%= image_tag @post.image.url %>
+  </p>
+<% end %>
 
 <h2>Comments</h2>
 

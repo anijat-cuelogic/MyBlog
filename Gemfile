@@ -33,6 +33,7 @@ gem 'rails-deprecated_sanitizer'
 gem 'devise'
 gem 'rails_admin'
 gem 'cancancan', '~> 1.10'
+gem "paperclip", "~> 4.3"
 
 # Use Unicorn as the app server
 # gem 'unicorn'
