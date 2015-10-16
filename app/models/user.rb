@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :posts, :foreign_key => :author_id ,:class_name =>"Post"
-  has_many :comments, :foreign_key => :commented_by ,:class_name =>"Comment"
+  has_many :posts, :foreign_key => :author_id ,:class_name =>"Post", dependent: :destroy
+  has_many :comments, :foreign_key => :commented_by ,:class_name =>"Comment", dependent: :destroy
   has_and_belongs_to_many :roles
   validates_presence_of :name
 
