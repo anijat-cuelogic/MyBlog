@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  respond_to :html, :json
+
   def create
     @post = Post.find(params[:post_id])
     respond_to do |format|
@@ -7,6 +9,16 @@ class CommentsController < ApplicationController
         format.js
       else
         @errors = @comment.errors.full_messages.to_sentence
+        format.js
+      end
+    end
+  end
+
+  def mark_spam
+    @post = Post.find(params[:post_id])
+    respond_to do |format|
+      @comment = Comment.find(params[:id])
+      if @comment.update(spam: true)
         format.js
       end
     end

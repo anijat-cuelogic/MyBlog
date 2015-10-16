@@ -45,11 +45,13 @@ RailsAdmin.config do |config|
       field :description
       field :commented_by
       field :post_id
+      field :spam
     end
     edit do
       field :description
       field :commented_by
       field :post_id
+      field :spam
     end
   end
 

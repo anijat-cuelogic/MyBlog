@@ -8,7 +8,11 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'posts#index'
   resources :posts do
-    resources :comments
+    resources :comments do
+      member do
+        get 'mark_spam'
+      end
+    end
   end
 
   # Example of regular route:
