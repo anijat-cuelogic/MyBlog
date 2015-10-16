@@ -1,4 +1,14 @@
 class RegistrationsController < Devise::RegistrationsController
+  after_filter :add_role
+
+  protected
+
+  def add_role
+    if resource.persisted? # user is created successfuly
+      role = Role.where(name: "registered_user").first_or_create
+      resource.roles << role
+    end
+  end
 
   private
 
