@@ -10,7 +10,7 @@
   <p>
     <%= post.description %>
   </p>
-  <p>-<%= post.user.name%></p>
+  <p><%= image_tag post.user.image.url(:thumb) if post.user.image.present? %>-<%= post.user.name%></p>
 <% end %>
 <br>
 <%= link_to 'New Post', new_post_path %>
