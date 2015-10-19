@@ -5,9 +5,9 @@
 <p>
   <%= @post.description %>
 </p>
-<%if @post.image%>
+<%if @post.image.present? %>
   <p>
-    <%= image_tag @post.image.url %>
+    <%= image_tag @post.image.url(:medium) %>
   </p>
 <% end %>
 

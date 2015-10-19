@@ -2,6 +2,11 @@
 
 <% @posts.each do |post| %>
   <h2><%= link_to post.title, post_path(post.to_param) %></h2>
+  <%if post.image.present? %>
+    <p>
+      <%= image_tag post.image.url(:medium) %>
+    </p>
+  <% end %>
   <p>
     <%= post.description %>
   </p>
