@@ -2,11 +2,15 @@
     <%= @errors%>
   <% end %>
 <% post.comments.each do |com| %>
-  <p> <%= com.description%><br />
+    <p>
+      <% class_name =   com.spam ? 'warn_spam' : 'nostyle' %>
+      <div class = "<%= class_name%> "><%= com.description%></div>
+      <div><%= image_tag com.user.image.url(:thumb) if com.user.image.present? %></div>
       <%=com.user.name%> : <%= com.created_at.strftime("%d-%b-%y at %l:%M")%><br />
       <% if user_signed_in? && com.user == current_user%>
         <%= link_to 'Destroy', [post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
       <%end%>
+      <%= link_to 'Mark Spam',mark_spam_post_comment_path(post,com), method: :get, remote: true %>
   </p>
 <% end %>
 <% if user_signed_in? %>

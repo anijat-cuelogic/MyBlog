@@ -13,6 +13,9 @@
     <%= f.hidden_field :author_id, value: current_user.id%>
   </div>
   <div>
+    <%= f.file_field :image %>
+  </div>
+  <div>
     <%= f.submit %>
   </div>
 <% end %>

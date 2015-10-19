@@ -5,6 +5,11 @@
 <p>
   <%= @post.description %>
 </p>
+<%if @post.image.present? %>
+  <p>
+    <%= image_tag @post.image.url(:medium) %>
+  </p>
+<% end %>
 
 <h2>Comments</h2>
 
