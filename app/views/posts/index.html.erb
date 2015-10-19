@@ -4,7 +4,9 @@
   <h2><%= link_to post.title, post_path(post.to_param) %></h2>
   <%if post.images.present? %>
     <p>
-      <%= image_tag post.images.first.attachment.url(:medium) %>
+      <% post.images.each do |image| %>
+        <%= image_tag image.attachment.url(:medium) %>
+      <% end %>
     </p>
   <% end %>
   <p>

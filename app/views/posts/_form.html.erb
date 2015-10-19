@@ -14,7 +14,7 @@
   </div>
   <div>
     Upload Image
-    <%= f.fields_for :images, @post.images.build do |ph| %>
+    <%= f.fields_for :images, 2.times {@post.images.build} do |ph| %>
       <%= ph.file_field :attachment %>
     <% end%>
   </div>
