@@ -1,4 +1,4 @@
-<%= form_for(@post) do |f| %>
+<%= form_for @post, :html => { :multipart => true } do |f| %>
   <% if @errors.present? %>
     <div><%= @errors %></div>
   <% end %>
@@ -13,7 +13,10 @@
     <%= f.hidden_field :author_id, value: current_user.id%>
   </div>
   <div>
-    <%= f.file_field :image %>
+    Upload Image
+    <%= f.fields_for :images, @post.images.build do |ph| %>
+      <%= ph.file_field :attachment %>
+    <% end%>
   </div>
   <div>
     <%= f.submit %>

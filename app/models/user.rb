@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   validates_presence_of :name
 
-  has_attached_file :image, styles: { medium: "300x300>", thumb: "60x60>" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
+  has_many :images, as: :imageable, dependent: :destroy
+  accepts_nested_attributes_for :images
 
   def role?(role)
     return !!self.roles.find_by_name(role.to_s)
