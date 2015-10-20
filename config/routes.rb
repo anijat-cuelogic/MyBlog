@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :comments do
       member do
         get 'mark_spam'
+        get 'vote'
       end
     end
   end

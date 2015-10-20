@@ -24,6 +24,27 @@ class CommentsController < ApplicationController
     end
   end
 
+  def vote
+    get_params(params[:post_id],params[:id])
+    flag = params[:flag]
+    voted = Vote.where(comment_id: @comment.id,user_id: current_user.id).first
+    respond_to do |format|
+      if voted.blank?
+        Vote.create(value: flag, user_id: current_user.id, comment_id: @comment.id)
+      elsif voted.present? && voted.value.to_s != flag
+        voted.update_attributes(value: flag)
+      elsif voted.present? && voted.value.to_s == flag
+        voted.destroy
+      end
+      format.js
+    end
+  end
+
+  def get_params(post_id,comment_id)
+    @post = Post.find(post_id)
+    @comment = Comment.find(comment_id)
+  end
+
   def destroy
     @comment = Comment.find(params[:id])
     post = @comment.post

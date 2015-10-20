@@ -11,7 +11,13 @@
         <%= link_to 'Destroy', [post,com], method: :delete, data: { confirm: 'Are you sure?' } %>
       <%end%>
       <%= link_to 'Mark Spam',mark_spam_post_comment_path(post,com), method: :get, remote: true %>
-  </p>
+      <% class_up =   (current_user.vote?(com,true).present?) ? 'warn_spam' : 'nostyle' %>
+      <% button_text =   (current_user.vote?(com,true).present?) ? 'Voted Up' : 'Vote Up' %>
+      <%= link_to "#{button_text}",vote_post_comment_path(post,com,:flag => true), class: "#{class_up}", method: :get, remote: true %>
+      <% class_down =   (current_user.vote?(com,false).present?) ? 'warn_spam' : 'nostyle' %>
+      <% button_text =   (current_user.vote?(com,false).present?) ? 'Voted Down' : 'Vote Down' %>
+      <%= link_to "#{button_text}",vote_post_comment_path(post,com,:flag => false), class: "#{class_down}", method: :get, remote: true %>
+    </p>
 <% end %>
 <% if user_signed_in? %>
   <%= form_for [post, post.comments.build] , remote: true do |f| %>
