@@ -3,7 +3,7 @@ require 'test_helper'
 class PostTest < ActiveSupport::TestCase
   test 'presence of post title and description' do
     @post = FactoryGirl.create(:post)
-    assert_equal @post.valid?, true, 'valid post'
+    assert_equal @post.valid?, true, 'Saved the post succesfully'
   end
 
   test 'absence of post params' do
