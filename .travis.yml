@@ -1,0 +1,29 @@
+language: ruby
+rvm:
+  - 2.3.0
+cache: bundler
+services:
+  - postgresql
+addons:
+  postgresql: "9.3"
+before_install:
+  - sudo apt-get autoremove postgresql*
+  - sudo apt-get install postgresql-9.3-postgis-2.1
+  - psql -U postgres -c "create role postgres SUPERUSER LOGIN PASSWORD 'password';"
+  # Could run the db:add_extensions_to_template1, db:create and db:migrate but
+  # rake tasks seem to return with an exit code of 1.
+  # - psql -U postgres -d template1 -c "create extension \"uuid-ossp\";"
+  # - psql -U postgres -d template1 -c "create extension \"hstore\";"
+  # - psql -U postgres -d template1 -c "create extension \"fuzzystrmatch\";"
+  # - psql -U postgres -d template1 -c "create extension \"pg_trgm\";"
+  # - psql -U postgres -d template1 -c "create extension \"pgcrypto\";"
+  # - psql -U postgres -c "create database cyclops_test OWNER cyclops_dev;"
+  # - psql -d cyclops_test -U cyclops_dev < db/structure.sql
+  - bundle install
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+before_script:
+  - git clone git@github.com:anijat-cuelogic/MyBlog.git
+script:
+  - bundle exec rake test
+# - bundle exec rake docker:build
